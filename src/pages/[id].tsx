@@ -11,6 +11,16 @@ export async function getServerSideProps(req: NextApiRequest){
   })
 
   if (url) {
+    await prisma.url.update({
+      where: {
+        slug: id as string
+      },
+      data: {
+        clicks: {
+          increment: 1
+        }
+      }
+    })
     return {
       redirect: {
         destination: url.url,
