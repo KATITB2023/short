@@ -40,12 +40,14 @@ export const urlRouter = createTRPCRouter({
       };
     }),
   getAllURLs: publicProcedure.query(async ({ ctx }) => {
-    return await ctx.prisma.url.findMany({
+    const urls = await ctx.prisma.url.findMany({
       select: {
         url: true,
         slug: true,
         clicks: true,
       },
     });
+
+    return urls.map((url) => {return {...url, shortLink: env.HOST_URL + `${url.slug}`}})
   }),
 });
