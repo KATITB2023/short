@@ -1,11 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { renderTrpcPanel } from "trpc-panel";
-import { appRouter } from "../../server/api/root";
+import { appRouter } from "~/server/api/root";
+import { env } from "~/env.mjs";
 
-export default function handler(_: NextApiRequest, res: NextApiResponse) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== "GET") {
+    res.status(405);
+    return;
+  }
+
   res.status(200).send(
     renderTrpcPanel(appRouter, {
-      url: "http://localhost:3000/api/trpc",
+      url: `${env.NEXT_PUBLIC_API_URL}/api/trpc`,
       transformer: "superjson",
     })
   );

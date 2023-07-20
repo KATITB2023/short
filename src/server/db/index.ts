@@ -1,4 +1,4 @@
-import { PrismaClient } from "@katitb2023/prisma-client";
+import { PrismaClient } from "@prisma/client";
 
 const instantiatePrisma = () => {
   const prisma = new PrismaClient();

@@ -8,17 +8,21 @@
     "lint": "next lint",
     "start": "next start"
   },
+  "prisma": {
+    "schema": "./node_modules/@katitb2023/database/schema.prisma"
+  },
   "dependencies": {
-    "@katitb2023/prisma-client": "git+https://github.com/KATITB2023/shared-prisma.git#url",
-    "@prisma/client": "^4.16.2",
+    "@katitb2023/database": "git+https://github.com/KATITB2023/database.git",
+    "@prisma/client": "4.15.0",
     "@t3-oss/env-nextjs": "^0.3.1",
     "@tanstack/react-query": "^4.29.7",
     "@trpc/client": "^10.26.0",
     "@trpc/next": "^10.26.0",
     "@trpc/react-query": "^10.26.0",
     "@trpc/server": "^10.26.0",
+    "framer-motion": "^10.13.0",
     "next": "^13.4.2",
-    "prisma": "^4.16.2",
+    "prisma": "4.15.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "superjson": "1.12.2",
