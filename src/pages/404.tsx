@@ -10,7 +10,7 @@ const ErrorPage: NextPage = () => {
   const { message } = router.query;
 
   return (
-    <Layout title="404 Error: Not Found">
+    <Layout title={`Error: ${message}`}>
       <div>
         <h1>{message}</h1>
       </div>
