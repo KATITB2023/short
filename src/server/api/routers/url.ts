@@ -23,7 +23,7 @@ export const urlRouter = createTRPCRouter({
       if (!shortenedLink)
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: "Shortened link not found",
+          message: "Requested Link Not Found",
         });
 
       return shortenedLink.destination;

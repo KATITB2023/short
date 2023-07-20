@@ -12,6 +12,7 @@ import Layout from "~/layout";
 import { appRouter } from "~/server/api/root";
 import { prisma } from "~/server/db";
 import { api } from "~/utils/api";
+import { env } from "~/env.mjs";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const helpers = createServerSideHelpers({
@@ -52,15 +53,26 @@ export default function HashPage(
 
   useEffect(() => {
     match(getRedirectURLQuery)
-      .with({ error: P.not(null) }, () => void router.push("/404"))
+      .with(
+        { error: P.not(null) },
+        (query) =>
+          void router.push(
+            new URL(
+              `/404?message=${query.error.message}`,
+              env.NEXT_PUBLIC_API_URL
+            )
+          )
+      )
       .with(
         { data: P.not(undefined) },
         (query) =>
           void incrementClicksMutation
             .mutateAsync({ source })
-            .then(() => router.push(query.data))
+            .then(() => router.push(new URL(query.data)))
       );
   }, [getRedirectURLQuery.data]);
+
+  // TODO: Make loading page if necessary
 
   return <Layout title="Redirecting . . ." />;
 }
