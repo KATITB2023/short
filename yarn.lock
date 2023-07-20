@@ -2401,6 +2401,11 @@ ts-node@^10.9.1:
     v8-compile-cache-lib "^3.0.1"
     yn "3.1.1"
 
+ts-pattern@^5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/ts-pattern/-/ts-pattern-5.0.4.tgz#11508e1fb09c4a65b3fa85fd297941792c0ab7d1"
+  integrity sha512-D5iVliqugv2C9541W2CNXFYNEZxr4TiHuLPuf49tKEdQFp/8y8fR0v1RExUvXkiWozKCwE7zv07C6EKxf0lKuQ==
+
 tsconfig-paths@^3.14.1:
   version "3.14.2"
   resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.14.2.tgz#6e32f1f79412decd261f92d633a9dc1cfa99f088"

@@ -5,12 +5,22 @@ import type {
   InferGetServerSidePropsType,
 } from "next";
 import { useRouter } from "next/router";
+import superjson from "superjson";
+import { match, P } from "ts-pattern";
+import { createServerSideHelpers } from "@trpc/react-query/server";
 import Layout from "~/layout";
-import { createHelpers } from "~/server/api/trpc";
+import { appRouter } from "~/server/api/root";
+import { prisma } from "~/server/db";
 import { api } from "~/utils/api";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const helpers = createHelpers();
+  const helpers = createServerSideHelpers({
+    router: appRouter,
+    ctx: {
+      prisma,
+    },
+    transformer: superjson,
+  });
 
   const source =
     context.params?.source instanceof Array
@@ -40,15 +50,17 @@ export default function HashPage(
   const incrementClicksMutation = api.url.incrementClicks.useMutation();
   const router = useRouter();
 
-  const { data } = getRedirectURLQuery;
-
   useEffect(() => {
-    if (!data) return;
-
-    void incrementClicksMutation
-      .mutateAsync({ source })
-      .then(() => router.push(data));
-  }, [data]);
+    match(getRedirectURLQuery)
+      .with({ error: P.not(null) }, () => void router.push("/404"))
+      .with(
+        { data: P.not(undefined) },
+        (query) =>
+          void incrementClicksMutation
+            .mutateAsync({ source })
+            .then(() => router.push(query.data))
+      );
+  }, [getRedirectURLQuery.data]);
 
   return <Layout title="Redirecting . . ." />;
 }

@@ -7,13 +7,11 @@
  * need to use are documented accordingly near the end.
  */
 
-import { createServerSideHelpers } from "@trpc/react-query/server";
 import { initTRPC } from "@trpc/server";
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 import superjson from "superjson";
 import { ZodError } from "zod";
 import { prisma } from "~/server/db";
-import { appRouter } from "~/server/api/root";
 
 /**
  * 1. CONTEXT
@@ -49,20 +47,6 @@ const createInnerTRPCContext = (_opts: CreateContextOptions) => {
  */
 export const createTRPCContext = (_opts: CreateNextContextOptions) => {
   return createInnerTRPCContext({});
-};
-
-/**
- * This is a helper that you can use to create helpers for your tRPC API. It is used in the
- * `getServerSideProps` function in next pages.
- *
- * @see https://trpc.io/docs/client/nextjs/server-side-helpers
- */
-export const createHelpers = () => {
-  return createServerSideHelpers({
-    router: appRouter,
-    ctx: createInnerTRPCContext({}),
-    transformer: superjson,
-  });
 };
 
 /**
