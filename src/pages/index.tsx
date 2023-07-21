@@ -39,18 +39,6 @@ export default function SubmitRedirecURL() {
   };
 
   useEffect(() => {
-    match(errors)
-      .with(
-        { source: P.not(undefined) },
-        (error) => alert(error.source.message) // TODO: Change error display to toast
-      )
-      .with(
-        { destination: P.not(undefined) },
-        (error) => alert(error.destination.message) // TODO: Change error display to toast
-      );
-  }, [errors]);
-
-  useEffect(() => {
     if (isSubmitSuccessful) reset(); // Reset if successful
   }, [isSubmitSuccessful]);
 
