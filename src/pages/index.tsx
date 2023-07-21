@@ -1,17 +1,17 @@
+import { useEffect } from "react";
 import { useForm, Controller, type SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import Layout from "~/layout";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { TRPCClientError } from "@trpc/client";
 import { createRedirectURLSchema } from "~/schema/url";
 import { api } from "~/utils/api";
-import { useEffect } from "react";
-import { TRPCClientError } from "@trpc/client";
+import Layout from "~/layout";
 
 // TODO: Make form page pretty
 
 type FormValues = z.infer<typeof createRedirectURLSchema>;
 
-export default function SubmitRedirecURL() {
+export default function SubmitRedirectURL() {
   const {
     control,
     handleSubmit,
