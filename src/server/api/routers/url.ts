@@ -24,7 +24,7 @@ export const urlRouter = createTRPCRouter({
       if (!shortenedLink)
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: "Requested Link Not Found",
+          message: `Requested link "${input.source}" not found!`,
         });
 
       return shortenedLink.destination;
@@ -52,7 +52,38 @@ export const urlRouter = createTRPCRouter({
   createRedirectURL: publicProcedure
     .input(createRedirectURLSchema)
     .mutation(async ({ ctx, input }) => {
-      return await ctx.prisma.shortenedLink.create({
+      const checkIfSourceExists = await ctx.prisma.shortenedLink.findUnique({
+        where: {
+          source: input.source,
+        },
+        select: {
+          destination: true,
+        },
+      });
+
+      if (checkIfSourceExists)
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: `Requested link is used by another URL: "${checkIfSourceExists.destination}"`,
+        });
+
+      const checkIfDestinationExists =
+        await ctx.prisma.shortenedLink.findUnique({
+          where: {
+            destination: input.destination,
+          },
+          select: {
+            source: true,
+          },
+        });
+
+      if (checkIfDestinationExists)
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: `Requested URL is already shortened: "${checkIfDestinationExists.source}"`,
+        });
+
+      await ctx.prisma.shortenedLink.create({
         data: {
           source: input.source,
           destination: input.destination,
