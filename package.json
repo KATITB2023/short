@@ -12,6 +12,7 @@
     "schema": "./node_modules/@katitb2023/database/schema.prisma"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.1.1",
     "@katitb2023/database": "git+https://github.com/KATITB2023/database.git",
     "@prisma/client": "4.15.0",
     "@t3-oss/env-nextjs": "^0.3.1",
@@ -25,6 +26,7 @@
     "prisma": "4.15.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.2",
     "superjson": "1.12.2",
     "trpc-panel": "^1.3.4",
     "ts-node": "^10.9.1",

@@ -1,12 +1,13 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { createRedirectURLSchema } from "~/schema/url";
 
 export const urlRouter = createTRPCRouter({
   getRedirectURL: publicProcedure
     .input(
       z.object({
-        source: z.string(),
+        source: z.string().min(1),
       })
     )
     .query(async ({ ctx, input }) => {
@@ -32,7 +33,7 @@ export const urlRouter = createTRPCRouter({
   incrementClicks: publicProcedure
     .input(
       z.object({
-        source: z.string(),
+        source: z.string().min(1),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -44,6 +45,17 @@ export const urlRouter = createTRPCRouter({
           clickCount: {
             increment: 1,
           },
+        },
+      });
+    }),
+
+  createRedirectURL: publicProcedure
+    .input(createRedirectURLSchema)
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.prisma.shortenedLink.create({
+        data: {
+          source: input.source,
+          destination: input.destination,
         },
       });
     }),
