@@ -93,7 +93,6 @@ export const urlRouter = createTRPCRouter({
         },
         select: {
           source: true,
-          destination: true,
         },
       });
     }),

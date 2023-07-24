@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { motion } from "framer-motion";
-import { Box } from "@chakra-ui/react";
 
 interface Props {
   title: string;
@@ -20,9 +19,7 @@ export default function Layout({ title, children }: Props) {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <Box px={{ base: 7, lg: 12 }} py={5}>
-          {children}
-        </Box>
+        {children}
       </motion.div>
     </>
   );
