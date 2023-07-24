@@ -213,7 +213,6 @@ export default function SubmitRedirectURL() {
                   <FormErrorMessage>{errors.source.message}</FormErrorMessage>
                 )}
               </FormControl>
-
               <FormControl isInvalid={!!errors.destination}>
                 <FormLabel>Destination</FormLabel>
                 <Controller
@@ -239,7 +238,7 @@ export default function SubmitRedirectURL() {
               </Button>
             </Flex>
           </form>
-          <Modal isOpen={isOpen} onClose={onClose}>
+          <Modal isOpen={isOpen} onClose={onClose} isCentered>
             <ModalOverlay />
             <ModalContent bgGradient="linear(to-br, navy.3, purple.1)">
               <ModalHeader color="white">
