@@ -2,8 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  user-select: none;
 }
 
 a {
@@ -11,6 +10,17 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+@font-face {
+  font-family: "Bodwars";
+  src: url("/fonts/Bodwars.otf");
+}
+
+@font-face {
+  font-family: "SomarRounded-Bold";
+  src: url("/fonts/SomarRounded-Bold.ttf");
+}
+
+@font-face {
+  font-family: "SomarRounded-Regular";
+  src: url("/fonts/SomarRounded-Regular.ttf");
 }

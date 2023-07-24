@@ -1,5 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+import { sanitizeUrl } from "@braintree/sanitize-url";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { createRedirectURLSchema } from "~/schema/url";
 
@@ -67,10 +68,12 @@ export const urlRouter = createTRPCRouter({
           message: `Requested link is used by another URL: "${checkIfSourceExists.destination}"`,
         });
 
+      const sanitizedDestination = sanitizeUrl(input.destination);
+
       const checkIfDestinationExists =
         await ctx.prisma.shortenedLink.findUnique({
           where: {
-            destination: input.destination,
+            destination: sanitizedDestination,
           },
           select: {
             source: true,
@@ -80,13 +83,17 @@ export const urlRouter = createTRPCRouter({
       if (checkIfDestinationExists)
         throw new TRPCError({
           code: "BAD_REQUEST",
-          message: `Requested URL is already shortened: "${checkIfDestinationExists.source}"`,
+          message: `Requested URL is already shortened to: "${checkIfDestinationExists.source}"`,
         });
 
-      await ctx.prisma.shortenedLink.create({
+      return await ctx.prisma.shortenedLink.create({
         data: {
           source: input.source,
-          destination: input.destination,
+          destination: sanitizedDestination,
+        },
+        select: {
+          source: true,
+          destination: true,
         },
       });
     }),

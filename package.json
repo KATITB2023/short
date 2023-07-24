@@ -12,6 +12,10 @@
     "schema": "./node_modules/@katitb2023/database/schema.prisma"
   },
   "dependencies": {
+    "@braintree/sanitize-url": "^6.0.2",
+    "@chakra-ui/react": "^2.8.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.1.1",
     "@katitb2023/database": "git+https://github.com/KATITB2023/database.git",
     "@prisma/client": "4.15.0",
