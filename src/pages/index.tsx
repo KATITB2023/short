@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from "react";
 import { useForm, Controller, type SubmitHandler } from "react-hook-form";
 import { type z } from "zod";
@@ -52,7 +51,6 @@ export default function SubmitRedirectURL() {
   });
 
   const createRedirectURLMutation = api.url.createRedirectURL.useMutation();
-  const toast = useToast();
 
   const [result, setResult] = useState<
     RouterOutputs["url"]["createRedirectURL"]
@@ -61,6 +59,7 @@ export default function SubmitRedirectURL() {
   });
   const [loading, setLoading] = useState<boolean>(false);
 
+  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const onSubmit: SubmitHandler<FormValues> = async (data, event) => {
@@ -91,8 +90,7 @@ export default function SubmitRedirectURL() {
 
       const response = await createRedirectURLMutation.mutateAsync(data);
 
-      setResult(response);
-
+      setResult(response); // Set result
       onOpen(); // Open modal
       reset(); // Reset form
     } catch (error) {

@@ -58,7 +58,7 @@ export default function HashPage(
         (query) =>
           void router.push(
             new URL(
-              `/404?message=${query.error.message}`,
+              `/404?message=${encodeURIComponent(query.error.message)}`,
               env.NEXT_PUBLIC_API_URL
             )
           )
