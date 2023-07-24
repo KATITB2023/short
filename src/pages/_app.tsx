@@ -1,4 +1,4 @@
-import { type AppType } from "next/app";
+import type { AppType } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
 import { api } from "~/utils/api";
 import theme from "~/styles/theme";

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm, Controller, type SubmitHandler } from "react-hook-form";
-import { type z } from "zod";
+import type { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TRPCClientError } from "@trpc/client";
 import {

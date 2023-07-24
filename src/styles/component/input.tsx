@@ -1,5 +1,5 @@
 import type { SystemStyleFunction } from "@chakra-ui/theme-tools";
-import { type ComponentStyleConfig } from "@chakra-ui/react";
+import type { ComponentStyleConfig } from "@chakra-ui/react";
 
 const variantDark: SystemStyleFunction = () => {
   return {
