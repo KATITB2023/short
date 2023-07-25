@@ -23,7 +23,9 @@ RUN \
 
 FROM --platform=linux/amd64 node:16-alpine3.17 AS builder
 ARG DATABASE_URL
-ARG NEXT_PUBLIC_CLIENTVAR
+ARG NEXT_PUBLIC_API_URL
+ENV DATABASE_URL=$DATABASE_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
