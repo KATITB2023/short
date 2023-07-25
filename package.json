@@ -19,7 +19,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.1.1",
-    "@katitb2023/database": "https://github.com/KATITB2023/database.git",
+    "@katitb2023/database": "git+https://github.com/KATITB2023/database.git",
     "@prisma/client": "4.15.0",
     "@t3-oss/env-nextjs": "^0.3.1",
     "@tanstack/react-query": "^4.29.7",
