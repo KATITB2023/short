@@ -199,7 +199,7 @@ export default function SubmitRedirectURL() {
                   name="source"
                   control={control}
                   render={({ field }) => (
-                    <InputGroup>
+                    <InputGroup flexDir={{"base": "column", "lg": "row"}}>
                       <InputLeftAddon>
                         {env.NEXT_PUBLIC_API_URL}/
                       </InputLeftAddon>
